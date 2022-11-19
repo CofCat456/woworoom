@@ -6,16 +6,16 @@
 
 @layer base {
   .font-style1 {
-    @apply font-normal text-4xl leading-[49px] text-black;
+    @apply text-4xl font-normal leading-[49px] text-black;
   }
   .font-style2 {
-    @apply font-normal text-[28px] leading-[38px] text-black;
+    @apply text-[28px] font-normal leading-[38px] text-black;
   }
   .font-style3 {
-    @apply font-normal text-xl leading-[27px] text-black;
+    @apply text-xl font-normal leading-[27px] text-black;
   }
   .font-style4 {
-    @apply font-normal text-base leading-[22px] text-black;
+    @apply text-base font-normal leading-[22px] text-black;
   }
 }
 
@@ -151,4 +151,5 @@ img {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
