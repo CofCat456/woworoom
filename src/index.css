@@ -5,6 +5,18 @@
 @tailwind utilities;
 
 @layer base {
+  .font-style1 {
+    @apply font-normal text-4xl leading-[49px] text-black;
+  }
+  .font-style2 {
+    @apply font-normal text-[28px] leading-[38px] text-black;
+  }
+  .font-style3 {
+    @apply font-normal text-xl leading-[27px] text-black;
+  }
+  .font-style4 {
+    @apply font-normal text-base leading-[22px] text-black;
+  }
 }
 
 /* reset css */
@@ -119,10 +131,6 @@ del {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
-
-/* base css */
-:root {
 }
 
 * {
