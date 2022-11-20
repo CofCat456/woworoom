@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WOWOROOM</title>
+
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/872faa9fd3.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header class="mx-auto flex w-full max-w-container items-center bg-white py-9">
@@ -20,7 +23,9 @@
           >
         </li>
         <li>
-          <a class="text-xl leading-[27px] duration-300 hover:text-primary">好評推薦 </a>
+          <a href="#compare" class="text-xl leading-[27px] duration-300 hover:text-primary"
+            >好評推薦
+          </a>
         </li>
         <li>
           <a class="text-xl leading-[27px] duration-300 hover:text-primary">運送方式</a>
@@ -63,6 +68,90 @@
           </li>
         </ul>
       </div>
+    </section>
+    <section id="compare" class="bg-[#f8f8f8] pt-12 pb-16">
+      <table class="m-4 mx-auto table-fixed border-collapse">
+        <caption class="font-style2 mb-8">
+          家具比較
+        </caption>
+        <thead>
+          <tr class="border-b-2 border-solid border-[#b9b9b9]">
+            <th
+              class="w-[190px] py-3 px-[15px] text-xl font-normal uppercase leading-[27px] text-[#797979]"
+            />
+            <th
+              class="w-[190px] py-3 px-[15px] text-xl font-normal uppercase leading-[27px] text-black"
+            >
+              窩窩系統模組家具
+            </th>
+            <th
+              class="w-[190px] py-3 px-[15px] text-xl font-normal uppercase leading-[27px] text-[#797979]"
+            >
+              組合式家具
+            </th>
+            <th
+              class="w-[190px] py-3 px-[15px] text-xl font-normal uppercase leading-[27px] text-[#797979]"
+            >
+              實木家具
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b-2 border-solid border-[#b9b9b9] text-center">
+            <td class="py-3 text-left text-xl font-normal uppercase leading-[27px] text-black">
+              可單人自行組裝
+            </td>
+            <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
+              <i class="fas fa-check"></i>
+            </td>
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]">不一定</td>
+
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
+          </tr>
+          <tr class="border-b-2 border-solid border-[#b9b9b9] text-center">
+            <td class="py-3 text-left text-xl font-normal uppercase leading-[27px] text-black">
+              可多次重複拆裝
+            </td>
+            <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
+              <i class="fas fa-check" />
+            </td>
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
+          </tr>
+          <tr class="border-b-2 border-solid border-[#b9b9b9] text-center">
+            <td class="py-3 text-left text-xl font-normal uppercase leading-[27px] text-black">
+              床墊規格彈性大
+            </td>
+            <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
+              <i class="fas fa-check" />
+            </td>
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]">不一定</td>
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]">不一定</td>
+          </tr>
+          <tr class="border-b-2 border-solid border-[#b9b9b9] text-center">
+            <td class="py-3 text-left text-xl font-normal uppercase leading-[27px] text-black">
+              材質可長久使用
+            </td>
+            <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
+              <i class="fas fa-check" />
+            </td>
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
+            <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
+              <i class="fas fa-check" />
+            </td>
+          </tr>
+          <tr class="border-b-2 border-solid border-[#b9b9b9] text-center">
+            <td class="py-3 text-left text-xl font-normal uppercase leading-[27px] text-black">
+              小客車即可搬運
+            </td>
+            <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
+              <i class="fas fa-check"></i>
+            </td>
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
+            <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
+          </tr>
+        </tbody>
+      </table>
     </section>
   </body>
 </html>
