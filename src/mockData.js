@@ -1,4 +1,4 @@
-export const recommendationData1 = [
+export const recommendationData = [
   {
     name: '王六角',
     buy: 'Jodan 雙人床架',
