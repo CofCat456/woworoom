@@ -85,20 +85,15 @@ function renderProductList(data) {
   productList.innerHTML = htmlstr;
 }
 
-const getProductList = async () => {
+(async () => {
   try {
     const res = await fetchProductList();
     const data = await res.json();
-    return data.products;
+    products = await data.products;
+    renderProductList(products);
   } catch (err) {
     console.log(err);
   }
-};
-
-(async () => {
-  const data = await getProductList();
-  products = data;
-  renderProductList(data);
 })();
 
 // --------------- 產品列表 ---------------
