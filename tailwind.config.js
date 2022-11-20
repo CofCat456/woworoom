@@ -6,8 +6,14 @@ module.exports = {
       colors: {
         primary: '#6A33F8',
       },
+      maxWidth: {
+        container: '1110px',
+      },
       width: {
         container: '1110px',
+      },
+      backgroundImage: {
+        banner: 'url(./assets/banner.png)',
       },
     },
   },
