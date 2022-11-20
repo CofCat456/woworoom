@@ -9,6 +9,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index.[hash].js',
+    assetModuleFilename: 'img/[hash][ext]',
     clean: true,
   },
   performance: {
@@ -47,6 +48,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
+      },
+      {
+        loader: 'image-webpack-loader',
       },
     ],
   },
