@@ -17,6 +17,12 @@
   .font-style4 {
     @apply text-base font-normal leading-[22px] text-black;
   }
+  .triangle {
+    @apply after:border-[10px] after:border-solid after:border-black after:border-t-transparent after:border-b-transparent after:border-r-transparent;
+  }
+  .shopping-method-circle {
+    @apply triangle relative mb-2 inline-flex aspect-square w-full items-center justify-center rounded-full border-[3px] border-solid border-black after:absolute after:top-1/2 after:-right-[65px] after:-translate-y-1/2;
+  }
 }
 
 /* reset css */

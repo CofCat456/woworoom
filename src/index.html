@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WOWOROOM</title>
 
-    <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/872faa9fd3.js" crossorigin="anonymous"></script>
+    <!-- Google Icon -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   </head>
   <body>
     <header class="mx-auto flex w-full max-w-container items-center bg-white py-9">
@@ -28,7 +30,9 @@
           </a>
         </li>
         <li>
-          <a class="text-xl leading-[27px] duration-300 hover:text-primary">運送方式</a>
+          <a href="#shopping-method" class="text-xl leading-[27px] duration-300 hover:text-primary"
+            >運送方式</a
+          >
         </li>
         <li>
           <a class="text-xl leading-[27px] duration-300 hover:text-primary">立即預訂</a>
@@ -102,7 +106,7 @@
               可單人自行組裝
             </td>
             <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
-              <i class="fas fa-check"></i>
+              <span class="material-icons text-4xl"> done </span>
             </td>
             <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]">不一定</td>
 
@@ -113,7 +117,7 @@
               可多次重複拆裝
             </td>
             <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
-              <i class="fas fa-check" />
+              <span class="material-icons text-4xl"> done </span>
             </td>
             <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
             <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
@@ -123,7 +127,7 @@
               床墊規格彈性大
             </td>
             <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
-              <i class="fas fa-check" />
+              <span class="material-icons text-4xl"> done </span>
             </td>
             <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]">不一定</td>
             <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]">不一定</td>
@@ -133,11 +137,11 @@
               材質可長久使用
             </td>
             <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
-              <i class="fas fa-check" />
+              <span class="material-icons text-4xl"> done </span>
             </td>
             <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
             <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
-              <i class="fas fa-check" />
+              <span class="material-icons text-4xl"> done </span>
             </td>
           </tr>
           <tr class="border-b-2 border-solid border-[#b9b9b9] text-center">
@@ -145,7 +149,7 @@
               小客車即可搬運
             </td>
             <td class="py-[15px] text-3xl font-normal uppercase leading-[27px] text-primary">
-              <i class="fas fa-check"></i>
+              <span class="material-icons text-4xl"> done </span>
             </td>
             <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
             <td class="font-style4 py-[15px] uppercase leading-[27px] text-[#797979]" />
@@ -166,6 +170,39 @@
           </ul>
         </div>
       </div>
+    </section>
+    <section id="shopping-method" class="py-8">
+      <h3 class="font-style2 mb-8 text-center">運送方式</h3>
+      <ul class="mx-auto flex w-full max-w-[730px] items-center gap-[90px]">
+        <li class="flex-1 text-center">
+          <div class="shopping-method-circle">
+            <span class="material-icons text-6xl"> shopping_cart </span>
+          </div>
+          <p class="font-style3">STEP.1</p>
+          <p class="font-style4">選購商品</p>
+        </li>
+        <li class="flex-1 text-center">
+          <div class="shopping-method-circle">
+            <span class="material-icons text-6xl"> format_list_bulleted </span>
+          </div>
+          <p class="font-style3">STEP.2</p>
+          <p class="font-style4">填寫預定資料</p>
+        </li>
+        <li class="flex-1 text-center">
+          <div class="shopping-method-circle">
+            <span class="material-icons text-6xl"> done </span>
+          </div>
+          <p class="font-style3">STEP.3</p>
+          <p class="font-style4">預定成功</p>
+        </li>
+        <li class="flex-1 text-center">
+          <div class="shopping-method-circle after:hidden">
+            <span class="material-icons text-6xl"> local_post_office </span>
+          </div>
+          <p class="font-style3">STEP.4</p>
+          <p class="font-style4">Email 付款資訊</p>
+        </li>
+      </ul>
     </section>
   </body>
 </html>
