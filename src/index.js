@@ -3,11 +3,12 @@ import './index.css';
 import './global/mouse';
 import { currency, calcSum } from './global/global';
 import { recommendationData } from './global/mockData';
-import { getProductApi, getShopCartApi } from './global/fetchApi';
+import { getProductApi, getShopCartApi, addShopCartApi } from './global/fetchApi';
 
 // --------------- Data ---------------
 
 let copyProducts = [];
+let copyShopCarts = [];
 
 // --------------- DOM Render ---------------
 
@@ -69,7 +70,7 @@ function renderProductItem(item) {
   return `<li class="max-w-[255px] w-full relative">
       <img src=${images} alt="${item.title} 的照片" 
       class="w-full object-cover rounded-bl-2 rounded-br-2" loading="lazy" />
-      <button type="button" data-id=${id}
+      <button id="addShopCart" type="button" data-id=${id}
       class="w-full py-[10px] text-center bg-black text-white text-xl leading-[25px] hover:bg-[#301E5F] duration-300 cursor-pointer">加入購物車</button/>
       <p class="font-style3 py-2">${title}</p>
       <p class="font-style3 font-sans line-through">${currency(originPrice, 'NT$')}</p>
@@ -177,6 +178,7 @@ async function getShopCarts() {
   const res = await getShopCartApi();
   const data = await res.json();
   const { carts, finalTotal } = data;
+  copyShopCarts = carts;
   renderShopCart(carts);
   renderShopCartFinalTotal(finalTotal);
 }
@@ -192,3 +194,29 @@ async function getShopCarts() {
 })();
 
 // --------------- 載入時 Call API ---------------
+
+const addShopCart = async (event) => {
+  if (event.target.getAttribute('id') !== 'addShopCart') return;
+  const { id } = event.target.dataset;
+  let quantity = copyShopCarts.find(({ product: { id: productId } }) => productId === id)?.quantity;
+
+  try {
+    const res = await addShopCartApi({
+      data: {
+        productId: id,
+        quantity: quantity ? (quantity += 1) : 1,
+      },
+    });
+    const data = await res.json();
+    const { carts, finalTotal } = data;
+    copyShopCarts = carts;
+    renderShopCart(carts);
+    renderShopCartFinalTotal(finalTotal);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+productList.addEventListener('click', addShopCart);
+
+// --------------- 新增購物車 ---------------
