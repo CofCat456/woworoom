@@ -15,14 +15,16 @@ const recommendationUl1 = document.querySelector('#recommendation_1');
 const recommendationUl2 = document.querySelector('#recommendation_2');
 
 function renderRecoItem(item, index) {
+  const { productImage, peopleImage } = item;
+
   return `
     <li class="flex w-full max-w-[350px] shrink-0 items-center">
-      <img src=${item.productImage} alt="推薦 ${index} 照片" class="w-[96px] aspect-square object-cover" />
+      <img src=${productImage} alt="推薦 ${index} 照片" class="w-[96px] aspect-square object-cover" />
       <div class="flex-1 bg-white py-3 pl-4">
         <div class="mb-2 flex items-center gap-2">
           <div class="h-10 w-10 overflow-hidden rounded-full">
             <img
-              src=${item.peopleImage}
+              src=${peopleImage}
               alt="推薦人 ${index} 照片"
               class="w-full object-cover"
               loading="lazy"
@@ -62,14 +64,16 @@ renderReco();
 const productList = document.querySelector('#product-list');
 
 function renderProductItem(item) {
+  const { images, title, id, origin_price: originPrice, price } = item;
+
   return `<li class="max-w-[255px] w-full relative">
-      <img src=${item.images} alt="${item.title} 的照片" 
+      <img src=${images} alt="${title} 的照片" 
       class="w-full object-cover rounded-bl-2 rounded-br-2" loading="lazy" />
-      <button type="button" data-id=${item.id}
+      <button type="button" data-id=${id}
       class="w-full py-[10px] text-center bg-black text-white text-xl leading-[25px] hover:bg-[#301E5F] duration-300 cursor-pointer">加入購物車</button/>
-      <p class="font-style3 py-2">${item.title}</p>
-      <p class="font-style3 font-sans line-through">${currency(item.origin_price, 'NT$')}</p>
-      <p class="font-style2 font-sans">${currency(item.price, 'NT$')}</p>
+      <p class="font-style3 py-2">${title}</p>
+      <p class="font-style3 font-sans line-through">${currency(originPrice, 'NT$')}</p>
+      <p class="font-style2 font-sans">${currency(price, 'NT$')}</p>
      <p class="absolute top-[13px] -right-[5px] bg-black py-2 px-6 font-style3 text-white">新品</p>
     </li>
   `;
@@ -109,7 +113,6 @@ productOrder.addEventListener('change', orderProduct);
 const shoppingCartTableBd = document.querySelector('#shopping_cart_table_body');
 
 function renderShopCartItem(cart) {
-  console.log(cart);
   const {
     product: { images, price, title },
     quantity,
@@ -164,7 +167,7 @@ function renderShopCartFinalTotal(total) {
   try {
     const responses = await Promise.all([fetchProductList(), fetchShoppingCart()]);
     const data = await Promise.all(responses.map((response) => response.json()));
-    const [{ products }, { carts, finalTotal, total }] = data;
+    const [{ products }, { carts, finalTotal }] = data;
     copyProducts = await products;
     renderProductList(products);
     renderShopCart(carts);
