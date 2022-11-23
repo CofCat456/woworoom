@@ -1,13 +1,13 @@
 import './index.css';
 
 import './mouse';
-import { currency } from './global';
+import { currency, calcSum } from './global';
 import { recommendationData } from './mockData';
-import { fetchProductList } from './fetch';
+import { fetchProductList, fetchShoppingCart } from './fetch';
 
 // --------------- Data ---------------
 
-let products = [];
+let copyProducts = [];
 
 // --------------- DOM Render ---------------
 
@@ -75,26 +75,15 @@ function renderProductItem(item) {
   `;
 }
 
-function renderProductList(data) {
+function renderProductList(products) {
   let htmlstr = '';
 
-  data.forEach((item) => {
-    htmlstr += renderProductItem(item);
+  products.forEach((product) => {
+    htmlstr += renderProductItem(product);
   });
 
   productList.innerHTML = htmlstr;
 }
-
-(async () => {
-  try {
-    const res = await fetchProductList();
-    const data = await res.json();
-    products = await data.products;
-    renderProductList(products);
-  } catch (err) {
-    console.log(err);
-  }
-})();
 
 // --------------- 產品列表 ---------------
 
@@ -105,12 +94,84 @@ function orderProduct(e) {
     case '床架':
     case '收納':
     case '窗簾':
-      renderProductList(products.filter(({ category }) => category === e.target.value));
+      renderProductList(copyProducts.filter(({ category }) => category === e.target.value));
       break;
     default:
-      renderProductList(products);
+      renderProductList(copyProducts);
       break;
   }
 }
 
 productOrder.addEventListener('change', orderProduct);
+
+// --------------- 產品排列 ---------------
+
+const shoppingCartTableBd = document.querySelector('#shopping_cart_table_body');
+
+function renderShopCartItem(cart) {
+  console.log(cart);
+  const {
+    product: { images, price, title },
+    quantity,
+  } = cart;
+  return `
+    <tr class="border-b-2 border-solid border-[#b9b9b9] text-center">
+      <td class="py-5 pr-[15px] flex items-center gap-[15px] text-left text-xl font-normal leading-[30px] text-black">
+        <img src=${images} alt="${title} 的照片" class="w-20 aspect-square object-cover object-center" />
+        ${title}
+      </td>
+      <td class="py-5 align-middle text-left font-sans px-[15px] font-style3">
+        ${currency(price, 'NT$')} 
+      </td>
+      <td class="py-5 align-middle px-[15px] text-left font-style3">
+        ${quantity}
+      </td>
+      <td class="py-5 px-[15px] font-style3 font-sans text-left align-middle">
+        ${currency(calcSum(price, quantity), 'NT$')}
+      </td>
+      <td class="py-5 px-[15px] font-style3 text-right align-middle">
+        <button type="button" class="p-2 group">
+          <span class="material-icons text-4xl group-hover:text-primary group-hover:scale-125 duration-200">
+            close
+          </span>
+        </button>
+      </td>
+    </tr>
+  `;
+}
+
+function renderShopCart(carts) {
+  let htmlstr = '';
+
+  carts.forEach((cart) => {
+    htmlstr += renderShopCartItem(cart);
+  });
+
+  shoppingCartTableBd.innerHTML = htmlstr;
+}
+
+// --------------- 購物車列表 ---------------
+
+const shoppingCartFinalToal = document.querySelector('#shopping_cart_final_total');
+
+function renderShopCartFinalTotal(total) {
+  shoppingCartFinalToal.textContent = currency(total, 'NT$');
+}
+
+// --------------- 購物車總金額 ---------------
+
+(async () => {
+  try {
+    const responses = await Promise.all([fetchProductList(), fetchShoppingCart()]);
+    const data = await Promise.all(responses.map((response) => response.json()));
+    const [{ products }, { carts, finalTotal, total }] = data;
+    copyProducts = await products;
+    renderProductList(products);
+    renderShopCart(carts);
+    renderShopCartFinalTotal(finalTotal);
+  } catch (err) {
+    console.log(err);
+  }
+})();
+
+// --------------- Call API ---------------

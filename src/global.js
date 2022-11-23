@@ -5,4 +5,9 @@ export function currency(val, symbol) {
   return symbol + arr[0].replace(re, '$1,') + (arr.length === 2 ? `.${arr[1]}` : '');
 }
 
+// 計算總和
+export function calcSum(price, quantity, symbol) {
+  return price * quantity;
+}
+
 export default {};
