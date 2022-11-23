@@ -6,7 +6,7 @@ export function currency(val, symbol) {
 }
 
 // 計算總和
-export function calcSum(price, quantity, symbol) {
+export function calcSum(price, quantity) {
   return price * quantity;
 }
 

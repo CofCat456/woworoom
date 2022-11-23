@@ -1,9 +1,9 @@
 import './index.css';
 
-import './mouse';
-import { currency, calcSum } from './global';
-import { recommendationData } from './mockData';
-import { fetchProductList, fetchShoppingCart } from './fetch';
+import './global/mouse';
+import { currency, calcSum } from './global/global';
+import { recommendationData } from './global/mockData';
+import { getProductApi, getShopCartApi } from './global/fetchApi';
 
 // --------------- Data ---------------
 
@@ -67,11 +67,7 @@ function renderProductItem(item) {
   const { images, title, id, origin_price: originPrice, price } = item;
 
   return `<li class="max-w-[255px] w-full relative">
-<<<<<<< HEAD
-      <img src=${images} alt="${title} 的照片" 
-=======
       <img src=${images} alt="${item.title} 的照片" 
->>>>>>> 7e912ea6073e3eb3b00b4a4c81ae71b42997c2b9
       class="w-full object-cover rounded-bl-2 rounded-br-2" loading="lazy" />
       <button type="button" data-id=${id}
       class="w-full py-[10px] text-center bg-black text-white text-xl leading-[25px] hover:bg-[#301E5F] duration-300 cursor-pointer">加入購物車</button/>
@@ -167,18 +163,32 @@ function renderShopCartFinalTotal(total) {
 
 // --------------- 購物車總金額 ---------------
 
+async function getProducts() {
+  const res = await getProductApi();
+  const data = await res.json();
+  const { products } = data;
+  copyProducts = await products;
+  renderProductList(products);
+}
+
+// --------------- 取得商品列表 ---------------
+
+async function getShopCarts() {
+  const res = await getShopCartApi();
+  const data = await res.json();
+  const { carts, finalTotal } = data;
+  renderShopCart(carts);
+  renderShopCartFinalTotal(finalTotal);
+}
+
+// --------------- 取得購物車列表 ---------------
+
 (async () => {
   try {
-    const responses = await Promise.all([fetchProductList(), fetchShoppingCart()]);
-    const data = await Promise.all(responses.map((response) => response.json()));
-    const [{ products }, { carts, finalTotal }] = data;
-    copyProducts = await products;
-    renderProductList(products);
-    renderShopCart(carts);
-    renderShopCartFinalTotal(finalTotal);
+    await Promise.all([getProducts(), getShopCarts()]);
   } catch (err) {
     console.log(err);
   }
 })();
 
-// --------------- Call API ---------------
+// --------------- 載入時 Call API ---------------
