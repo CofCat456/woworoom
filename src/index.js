@@ -67,7 +67,11 @@ function renderProductItem(item) {
   const { images, title, id, origin_price: originPrice, price } = item;
 
   return `<li class="max-w-[255px] w-full relative">
+<<<<<<< HEAD
       <img src=${images} alt="${title} 的照片" 
+=======
+      <img src=${images} alt="${item.title} 的照片" 
+>>>>>>> 7e912ea6073e3eb3b00b4a4c81ae71b42997c2b9
       class="w-full object-cover rounded-bl-2 rounded-br-2" loading="lazy" />
       <button type="button" data-id=${id}
       class="w-full py-[10px] text-center bg-black text-white text-xl leading-[25px] hover:bg-[#301E5F] duration-300 cursor-pointer">加入購物車</button/>
