@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 // 換算金錢
 export function currency(val, symbol) {
   const arr = val.toString().split('.');
@@ -8,6 +10,15 @@ export function currency(val, symbol) {
 // 計算總和
 export function calcSum(price, quantity) {
   return price * quantity;
+}
+
+export function callSwal() {
+  Swal.fire({
+    title: 'Error!',
+    text: 'Do you want to continue',
+    icon: 'error',
+    confirmButtonText: 'Cool',
+  });
 }
 
 export default {};

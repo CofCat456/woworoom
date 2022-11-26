@@ -1,7 +1,7 @@
 import './index.css';
 
 import './global/mouse';
-import { currency, calcSum } from './global/global';
+import { currency, calcSum, callSwal } from './global/global';
 import { recommendationData } from './global/mockData';
 import { getProductApi, getShopCartApi, addShopCartApi } from './global/fetchApi';
 
