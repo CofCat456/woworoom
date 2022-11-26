@@ -70,8 +70,13 @@ function renderProductItem(item) {
   return `<li class="max-w-[255px] w-full relative">
       <img src=${images} alt="${item.title} 的照片" 
       class="w-full object-cover rounded-bl-2 rounded-br-2" loading="lazy" />
-      <button id="addShopCart" type="button" data-id=${id}
-      class="w-full py-[10px] text-center bg-black text-white text-xl leading-[25px] hover:bg-[#301E5F] duration-300 cursor-pointer">加入購物車</button/>
+      <button id="addShopCart" type="button" data-id=${id} class="addShopCart">
+        <svg class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        加入購物車
+      </button/>
       <p class="font-style3 py-2">${title}</p>
       <p class="font-style3 font-sans line-through">${currency(originPrice, 'NT$')}</p>
       <p class="font-style2 font-sans">${currency(price, 'NT$')}</p>
@@ -198,9 +203,11 @@ async function getShopCarts() {
 const addShopCart = async (event) => {
   if (event.target.getAttribute('id') !== 'addShopCart') return;
   const { id } = event.target.dataset;
+  const Loading = event.target.children[0];
   let quantity = copyShopCarts.find(({ product: { id: productId } }) => productId === id)?.quantity;
 
   try {
+    Loading.classList.remove('hidden');
     const res = await addShopCartApi({
       data: {
         productId: id,
@@ -221,6 +228,7 @@ const addShopCart = async (event) => {
       status,
       title: '加入成功 ⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾',
     });
+    Loading.classList.add('hidden');
     copyShopCarts = carts;
     renderShopCart(carts);
     renderShopCartFinalTotal(finalTotal);
