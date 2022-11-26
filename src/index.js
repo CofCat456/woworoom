@@ -1,7 +1,7 @@
 import './index.css';
 
 import './global/mouse';
-import { currency, calcSum, callSwal } from './global/global';
+import { currency, calcSum, callSwal, isReject } from './global/global';
 import { recommendationData } from './global/mockData';
 import { getProductApi, getShopCartApi, addShopCartApi } from './global/fetchApi';
 
@@ -208,7 +208,19 @@ const addShopCart = async (event) => {
       },
     });
     const data = await res.json();
-    const { carts, finalTotal } = data;
+    const { status, message = '', carts, finalTotal } = data;
+    if (isReject(status)) {
+      callSwal({
+        status,
+        title: '加入失敗 (′゜ω。‵)',
+        msg: message,
+      });
+      return;
+    }
+    callSwal({
+      status,
+      title: '加入成功 ⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾',
+    });
     copyShopCarts = carts;
     renderShopCart(carts);
     renderShopCartFinalTotal(finalTotal);

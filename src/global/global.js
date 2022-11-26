@@ -12,13 +12,20 @@ export function calcSum(price, quantity) {
   return price * quantity;
 }
 
-export function callSwal() {
+export function callSwal(info) {
+  const { status, title, msg = '', timer = 1500 } = info;
   Swal.fire({
-    title: 'Error!',
-    text: 'Do you want to continue',
-    icon: 'error',
-    confirmButtonText: 'Cool',
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer,
+    timerProgressBar: true,
+    icon: status ? 'success' : 'error',
+    title,
+    text: msg !== '' ? msg : '',
   });
 }
+
+export const isReject = (status) => status === 'false';
 
 export default {};
