@@ -3,7 +3,12 @@ import './index.css';
 import './global/mouse';
 import { currency, calcSum, callSwal, isReject } from './global/global';
 import { recommendationData } from './global/mockData';
-import { getProductApi, getShopCartApi, addShopCartApi } from './global/fetchApi';
+import {
+  getProductApi,
+  getShopCartApi,
+  addShopCartApi,
+  deleteShopCartAPi,
+} from './global/fetchApi';
 
 // --------------- Data ---------------
 
@@ -70,7 +75,7 @@ function renderProductItem(item) {
   return `<li class="max-w-[255px] w-full relative">
       <img src=${images} alt="${item.title} 的照片" 
       class="w-full object-cover rounded-bl-2 rounded-br-2" loading="lazy" />
-      <button id="addShopCart" type="button" data-id=${id} class="addShopCart">
+      <button id="addShopCart" type="button" class="addShopCart" data-id=${id}>
         <svg class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -120,6 +125,7 @@ const shoppingCartTableBd = document.querySelector('#shopping_cart_table_body');
 
 function renderShopCartItem(cart) {
   const {
+    id,
     product: { images, price, title },
     quantity,
   } = cart;
@@ -139,8 +145,12 @@ function renderShopCartItem(cart) {
         ${currency(calcSum(price, quantity), 'NT$')}
       </td>
       <td class="py-5 px-[15px] font-style3 text-right align-middle">
-        <button type="button" class="p-2 group">
-          <span class="material-icons text-4xl group-hover:text-primary group-hover:scale-125 duration-200">
+        <button type="button" id="delShopCart" class="p-2 group" data-id=${id}>
+          <svg class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          <span class="material-icons pointer-events-none text-4xl group-hover:text-primary group-hover:scale-125 duration-200">
             close
           </span>
         </button>
@@ -240,3 +250,41 @@ const addShopCart = async (event) => {
 productList.addEventListener('click', addShopCart);
 
 // --------------- 新增購物車 ---------------
+
+const delShopCart = async (event) => {
+  if (event.target.getAttribute('id') !== 'delShopCart') return;
+
+  const { id } = event.target.dataset;
+  const Loading = event.target.children[0];
+
+  try {
+    Loading.classList.remove('hidden');
+    const res = await deleteShopCartAPi(id);
+    console.log(res);
+    const data = await res.json();
+    console.log(data);
+    const { status, message = '', carts, finalTotal } = data;
+    if (isReject(status)) {
+      callSwal({
+        status,
+        title: '刪除失敗 (′゜ω。‵)',
+        msg: message,
+      });
+      return;
+    }
+    callSwal({
+      status,
+      title: '刪除成功 ⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾',
+    });
+    Loading.classList.add('hidden');
+    copyShopCarts = carts;
+    renderShopCart(carts);
+    renderShopCartFinalTotal(finalTotal);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+shoppingCartTableBd.addEventListener('click', delShopCart);
+
+// --------------- 刪除購物車 ---------------

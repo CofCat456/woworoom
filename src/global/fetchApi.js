@@ -23,4 +23,6 @@ export const getShopCartApi = () => fetch(apiShopCartPath);
 
 export const addShopCartApi = (data) => fetchRequest('POST', apiShopCartPath, data);
 
+export const deleteShopCartAPi = (id) => fetchRequest('DELETE', `${apiShopCartPath}/${id}`);
+
 // --------------- Customer ---------------
