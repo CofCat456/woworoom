@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2';
 import './index.css';
 
 import './global/mouse';
@@ -8,6 +9,7 @@ import {
   getShopCartApi,
   addShopCartApi,
   deleteShopCartAPi,
+  deleteAllShopCartAPi,
 } from './global/fetchApi';
 
 // --------------- Data ---------------
@@ -145,8 +147,8 @@ function renderShopCartItem(cart) {
         ${currency(calcSum(price, quantity), 'NT$')}
       </td>
       <td class="py-5 px-[15px] font-style3 text-right align-middle">
-        <button type="button" id="delShopCart" class="p-2 group" data-id=${id}>
-          <svg class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <button type="button" id="delShopCart" class="p-2 group inline-flex items-center justify-center" data-id=${id}>
+          <svg class="hidden animate-spin -ml-1 mr-3 w-8 h-9 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
@@ -256,13 +258,13 @@ const delShopCart = async (event) => {
 
   const { id } = event.target.dataset;
   const Loading = event.target.children[0];
+  const originIcon = event.target.children[1];
 
   try {
     Loading.classList.remove('hidden');
+    originIcon.classList.add('hidden');
     const res = await deleteShopCartAPi(id);
-    console.log(res);
     const data = await res.json();
-    console.log(data);
     const { status, message = '', carts, finalTotal } = data;
     if (isReject(status)) {
       callSwal({
@@ -277,6 +279,7 @@ const delShopCart = async (event) => {
       title: '刪除成功 ⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾',
     });
     Loading.classList.add('hidden');
+    originIcon.classList.remove('hidden');
     copyShopCarts = carts;
     renderShopCart(carts);
     renderShopCartFinalTotal(finalTotal);
@@ -287,4 +290,49 @@ const delShopCart = async (event) => {
 
 shoppingCartTableBd.addEventListener('click', delShopCart);
 
-// --------------- 刪除購物車 ---------------
+// --------------- 移除購物車產品 ---------------
+
+const shoppingCartDelAllBtn = document.querySelector('#shopping_cart_delAll_btn');
+
+const delAllShopCart = async () => {
+  try {
+    const result = await Swal.fire({
+      title: '確定要清空購物車嗎?',
+      text: '他們將在宇宙中漂流...',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確認流放',
+      cancelButtonText: '再想想',
+    });
+
+    if (result.isConfirmed) {
+      const res = await deleteAllShopCartAPi();
+      const data = await res.json();
+      const { status, message = '', carts, finalTotal } = data;
+      if (isReject(status)) {
+        callSwal({
+          status,
+          title: '刪除失敗 (′゜ω。‵)',
+          msg: message,
+        });
+        return;
+      }
+      callSwal({
+        status,
+        title: '你將在宇宙盡頭找到他們 (☍﹏⁰)',
+      });
+
+      copyShopCarts = carts;
+      renderShopCart(carts);
+      renderShopCartFinalTotal(finalTotal);
+    }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+shoppingCartDelAllBtn.addEventListener('click', delAllShopCart);
+
+// --------------- 移除全部購物車產品 ---------------

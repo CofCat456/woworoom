@@ -26,6 +26,6 @@ export function callSwal(info) {
   });
 }
 
-export const isReject = (status) => status === 'false';
+export const isReject = (status) => status === false;
 
 export default {};
