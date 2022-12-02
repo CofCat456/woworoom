@@ -268,5 +268,68 @@
         </tfoot>
       </table>
     </section>
+    <section id="form" class="py-[60px]">
+      <form id="main" class="mx-auto flex w-full max-w-[350px] flex-col items-center bg-white py-9">
+        <h3 class="font-style2 mb-8 text-center">填寫預定資料</h3>
+        <div class="form-group">
+          <label for="name" class="font-style4 mb-[6px] w-full">姓名</label>
+          <div class="relative">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-control"
+              placeholder="請輸入性名"
+            />
+            <div class="error-msg"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="tel" class="font-style4 mb-[6px] w-full">電話</label>
+          <div class="relative">
+            <input type="text" id="tel" name="tel" class="form-control" placeholder="請輸入電話" />
+            <div class="error-msg"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="font-style4 mb-[6px] w-full">Email</label>
+          <div class="relative">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="請輸入 Email"
+            />
+            <div class="error-msg"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="address" class="font-style4 mb-[6px] w-full">寄送地址</label>
+          <div class="relative">
+            <input
+              type="text"
+              id="address"
+              name="address"
+              class="form-control"
+              placeholder="寄送地址"
+            />
+            <div class="error-msg"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="payment" class="font-style4 mb-[6px] w-full">交易方式</label>
+          <div class="relative">
+            <select id="payment" name="payment" class="form-control">
+              <option value="ATM">ATM</option>
+              <option value="VISA">信用卡</option>
+              <option value="7-11">超商付款</option>
+            </select>
+            <div class="error-msg"></div>
+          </div>
+        </div>
+        <button type="submit" class="form-subBtn">註冊</button>
+      </form>
+    </section>
   </body>
 </html>

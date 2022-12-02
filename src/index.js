@@ -1,7 +1,9 @@
 import Swal from 'sweetalert2';
+
 import './index.css';
 
 import './global/mouse';
+import './global/form';
 import { currency, calcSum, callSwal, isReject } from './global/global';
 import { recommendationData } from './global/mockData';
 import {

@@ -70,3 +70,42 @@ export const recommendationData = [
     evaluation: '睡起來很舒適',
   },
 ];
+
+export const formItemData = {
+  name: {
+    presence: {
+      message: '^必填',
+    },
+  },
+  tel: {
+    presence: {
+      message: '^必填',
+    },
+    format: {
+      pattern: '^09[0-9]{8}$',
+      message: '^電話 格式錯誤',
+    },
+  },
+  email: {
+    presence: {
+      message: '^必填',
+    },
+    email: {
+      message: '^Email 格式錯誤',
+    },
+  },
+  address: {
+    presence: {
+      message: '^必填',
+    },
+  },
+  payment: {
+    presence: {
+      message: '^必填',
+    },
+    inclusion: {
+      within: ['ATM', 'VISA', '7-11'],
+      message: '^鼻要亂來喔 öㅅö',
+    },
+  },
+};

@@ -35,6 +35,7 @@
     "webpack-dev-server": "^4.10.0"
   },
   "dependencies": {
-    "sweetalert2": "^11.6.14"
+    "sweetalert2": "^11.6.14",
+    "validate.js": "^0.13.1"
   }
 }
