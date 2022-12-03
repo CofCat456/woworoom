@@ -1,4 +1,4 @@
-import { apiProductPath, apiShopCartPath } from './constants.js';
+import { apiProductPath, apiShopCartPath, apiOrdersPath } from './constants.js';
 
 const optionBase = {
   headers: {
@@ -26,5 +26,7 @@ export const addShopCartApi = (data) => fetchRequest('POST', apiShopCartPath, da
 export const deleteShopCartAPi = (id) => fetchRequest('DELETE', `${apiShopCartPath}/${id}`);
 
 export const deleteAllShopCartAPi = () => fetchRequest('DELETE', `${apiShopCartPath}`);
+
+export const addOrderApi = (data) => fetchRequest('POST', `${apiOrdersPath}`, data);
 
 // --------------- Customer ---------------

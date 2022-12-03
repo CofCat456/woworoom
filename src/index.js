@@ -268,6 +268,7 @@ const delShopCart = async (event) => {
     const res = await deleteShopCartAPi(id);
     const data = await res.json();
     const { status, message = '', carts, finalTotal } = data;
+    Loading.classList.add('hidden');
     if (isReject(status)) {
       callSwal({
         status,
@@ -280,7 +281,6 @@ const delShopCart = async (event) => {
       status,
       title: '刪除成功 ⁽⁽٩(๑˃̶͈̀ ᗨ ˂̶͈́)۶⁾⁾',
     });
-    Loading.classList.add('hidden');
     originIcon.classList.remove('hidden');
     copyShopCarts = carts;
     renderShopCart(carts);

@@ -33,7 +33,7 @@
     @apply relative mr-2 min-w-[350px] rounded border border-solid border-[#CED4DA] py-2 pl-3;
   }
   .form-subBtn {
-    @apply w-full max-w-[255px] cursor-pointer rounded bg-black py-[10px] text-center text-xl leading-6 text-white duration-300 hover:bg-[#301E5F];
+    @apply inline-flex w-full max-w-[255px] cursor-pointer items-center justify-center rounded bg-black py-[10px] text-center text-xl leading-6 text-white duration-300 hover:bg-[#301E5F];
   }
   .error-msg {
     @apply font-style4 absolute left-[100%] top-1/2 w-full -translate-y-1/2 text-[#C72424];
